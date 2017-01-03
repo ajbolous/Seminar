@@ -17,7 +17,7 @@ class KmeanSolver():
         points = []
         indexes = len(self._points)
         for i in range(self._k):
-            points.append(self._points[random.randint(0,indexes)])
+            points.append(self._points[random.randint(0,indexes-1)])
         return points
 
     def getClusters(self):
