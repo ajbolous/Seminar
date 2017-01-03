@@ -1,5 +1,11 @@
 import math
 
+def manhattanDistance(v,u):
+    dist = 0
+    for a,b in zip(v,u):
+        dist += math.fabs(a-b)
+    return dist
+
 def euclidianDistance(v,u):
     s = 0
     for a,b in zip(v,u):
