@@ -1,17 +1,17 @@
 #!/usr/bin/env python 
 from algorithms.kmean import KmeanSolver
 from utils.visualization import ClusterPlot
-from utils.data_generator import randomData
+from utils.data_generator import randomData, getArgs
 
-k = 3
+args = getArgs()
 
-points = randomData(100,100,3)
-pl = ClusterPlot()
-pl.plotPoints(points,'3d')
+points = randomData(args.size,100,args.dim)
 
-solver = KmeanSolver(points, k)
+solver = KmeanSolver(points, args.k)
 solver.solve()
 
-pl.plot(solver,'3d')
+pl = ClusterPlot()
+pl.plot(points, solver, proj='3d' if args.d3 else None)
 
-#pl.plotDendo(points)
+if args.dendo:
+    pl.plotDendo(points)

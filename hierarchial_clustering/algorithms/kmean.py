@@ -17,7 +17,7 @@ class KmeanSolver():
         points = []
         indexes = len(self._points)
         for i in range(self._k):
-            points.append(self._points[random.randint(0,indexes)])
+            points.append(self._points[random.randint(0,indexes-1)])
         return points
 
     def getClusters(self):
@@ -32,10 +32,11 @@ class KmeanSolver():
         return minimal
 
     def solve(self):
+        #todo dynamically choose k
         #Initialize the random clusters
         self._clusters = [Cluster([point],point) for point in self.randPoints()]
-
-        for i in range(1,50):
+        #todo find a dynamic stop threshold
+        for i in range(1,20):
 
             for cluster in self._clusters:
                 cluster.calcCentroid()

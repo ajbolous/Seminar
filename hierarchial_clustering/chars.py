@@ -1,16 +1,17 @@
 #!/usr/bin/env python 
 from algorithms.kmean import KmeanSolver
 from utils.visualization import ClusterPlot
-from utils.data_generator import randomChars
+from utils.data_generator import randomChars, getArgs
 from utils.distances import manhattanDistance
-k = 5
 
-points = randomChars(25)
+args = getArgs()
+
+points = randomChars(args.size)
 pl = ClusterPlot()
-pl.plotPoints(points)
 
-solver = KmeanSolver(points, k, manhattanDistance)
+solver = KmeanSolver(points, args.k, manhattanDistance)
 solver.solve()
+pl.plot(points, solver, labels=[str(unichr(point[0])) for point in points], proj='3d' if args.d3 else None )
 
-pl.plot(solver)
-pl.plotDendo(points, [str(unichr(point[0])) for point in points])
+if args.dendo:
+    pl.plotDendo(points, [str(unichr(point[0])) for point in points])

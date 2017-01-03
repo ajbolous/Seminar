@@ -1,19 +1,20 @@
 #!/usr/bin/env python 
 from algorithms.kmean import KmeanSolver
 from utils.visualization import ClusterPlot
-from utils.data_generator import generateWordVectors
+from utils.data_generator import generateWordVectors, getArgs
 from utils.distances import manhattanDistance
-k = 5
 
-words = ['word','work','ward','good','golf','bad','ace','hello','was','apple','ate','meet','war','jello','bat','hat','rat']
+args = getArgs()
+
+words = ['word','work','store','goal','bore','star','guitar','get','set',
+	'more','sore','ward','good','golf','bad','ace','ban','ran','ham',
+	'hello','was','apple','ate','meet','war','jello','bat','hat','rat']
 points = generateWordVectors(words,5)
-pl = ClusterPlot()
-pl.plotPoints(points)
-
-solver = KmeanSolver(points, k, manhattanDistance)
+solver = KmeanSolver(points, args.k, manhattanDistance)
 solver.solve()
-pl.plot(solver)
 
-print(solver.getClusters())
+pl = ClusterPlot()
+pl.plot(points, solver, labels=words, proj='3d' if args.d3 else None)
 
-pl.plotDendo(points, words)
+if args.dendo:
+    pl.plotDendo(points, words)
