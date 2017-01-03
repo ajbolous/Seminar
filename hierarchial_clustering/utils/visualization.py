@@ -3,6 +3,7 @@ from matplotlib.patches import Ellipse
 from itertools import cycle
 from distances import calculateEllipse
 from matplotlib.colors import cnames
+from scipy.cluster.hierarchy import dendrogram,linkage
 
 class ClusterPlot():
     def __init__(self, dim):
@@ -19,6 +20,21 @@ class ClusterPlot():
             self.plotCluster(cluster)
 
         self.showPlot()
+
+    def plotDendo(self, points):
+        Z = linkage(points)
+        print points
+        plot.figure(figsize=(25, 10))
+        plot.title('Hierarchical Clustering Dendrogram')
+        plot.xlabel('sample index')
+        plot.ylabel('distance')
+        dendrogram(
+            Z,
+            leaf_rotation=90.,  # rotates the x axis labels
+            leaf_font_size=8.,  # font size for the x axis labels
+        )
+        plot.show()
+
 
     def plotCluster(self, cluster):
         color = self._colors.next()

@@ -6,6 +6,7 @@ def euclidianDistance(v,u):
         s += math.pow(a-b,2)
     return math.sqrt(s)
 
+
 def calculateEllipse(points, centroid):
     maxx = maxy = 0
     angle = 0
