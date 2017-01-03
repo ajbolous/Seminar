@@ -2,10 +2,8 @@ from utils.cluster import Cluster
 from utils.distances import *
 import random
 from sys import maxsize
-from utils.visualization import ClusterPlot
-import time
 
-class KmeansSolver():
+class KmeanSolver():
     def __init__(self, data, k, dfunc=None):
         self._points = data
         self._k = k
@@ -37,7 +35,7 @@ class KmeansSolver():
         #Initialize the random clusters
         self._clusters = [Cluster([point],point) for point in self.randPoints()]
 
-        for i in range(1,10):
+        for i in range(1,50):
 
             for cluster in self._clusters:
                 cluster.calcCentroid()

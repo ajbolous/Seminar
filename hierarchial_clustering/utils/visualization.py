@@ -6,7 +6,6 @@ from matplotlib.colors import cnames
 
 class ClusterPlot():
     def __init__(self, dim):
-        print cnames
         self._colors = cycle(cnames)
         self.fig = plot.figure(0)
         self.dim = dim
@@ -15,6 +14,11 @@ class ClusterPlot():
         else:
             self.ax = self.fig.add_subplot(111, aspect='equal')
 
+    def plot(self, solver):
+        for cluster in solver.getClusters():
+            self.plotCluster(cluster)
+
+        self.showPlot()
 
     def plotCluster(self, cluster):
         color = self._colors.next()
@@ -47,7 +51,6 @@ class ClusterPlot():
 
     def plotEllipse(self, cluster, color):
         ellipse = calculateEllipse(cluster.getPoints(), cluster.getCentroid())
-        print(ellipse)
         el = Ellipse(xy=ellipse[0], width=ellipse[1]*2, height=ellipse[2]*2, angle= ellipse[3], color=color)
         el.set_alpha(0.25)
         self.ax.add_artist(el)
