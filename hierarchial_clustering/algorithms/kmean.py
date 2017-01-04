@@ -1,7 +1,7 @@
 from utils.cluster import Cluster
 from utils.distances import *
 import random
-from sys import maxsize
+from sys import maxint
 
 class KmeanSolver():
     def __init__(self, data, k, dfunc=None):
@@ -14,17 +14,28 @@ class KmeanSolver():
             self._df = dfunc
 
     def randPoints(self):
-        points = []
         indexes = len(self._points)
-        for i in range(self._k):
-            points.append(self._points[random.randint(0,indexes-1)])
+        points = [self._points[random.randint(0,indexes-1)]]
+        maxdist = maxint
+
+        while len(points) < self._k:
+            maxp = self._points[random.randint(0,indexes-1)]
+            dist = 0
+            for point in self._points:
+                for p in points:
+                    dist += self._df(point,p)
+                if dist<maxdist:
+                    maxp = point
+                    maxdist = dist
+
+            points.append(maxp)
         return points
 
     def getClusters(self):
         return self._clusters
 
     def findMinimalCluster(self, point):
-        minimal = (maxsize,None)
+        minimal = (maxint, None)
         for cluster in self._clusters:
             dist = self._df(cluster.getCentroid(), point)
             if dist < minimal[0]:

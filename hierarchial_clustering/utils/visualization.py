@@ -44,7 +44,7 @@ class ClusterPlot():
 
     def plotPoints(self, points,proj=None):
         fig = plot.figure(0)
-        ax = fig.add_subplot(111, aspect='equal', projection=proj)
+        ax = fig.add_subplot(111,  projection=proj)
         if proj == '3d':
             self.plotPoints3d(points,'black', ax)
         else:

@@ -8,7 +8,13 @@ args = getArgs()
 
 points = randomClusters(args.dim, args.size)
 
-solver = KmeanSolver(points, args.k)
+
+
+from algorithms.elbow_method import findBestK
+
+bestk = findBestK(points,args.k)
+
+solver = KmeanSolver(points, bestk)
 solver.solve()
 
 pl = ClusterPlot()

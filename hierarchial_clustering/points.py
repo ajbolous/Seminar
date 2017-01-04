@@ -2,12 +2,15 @@
 from algorithms.kmean import KmeanSolver
 from utils.visualization import ClusterPlot
 from utils.data_generator import randomData, getArgs
+from algorithms.elbow_method import findBestK
 
 args = getArgs()
 
-points = randomData(args.size,100,args.dim)
+points = randomData(args.size,50,args.dim)
 
-solver = KmeanSolver(points, args.k)
+bestk = findBestK(points,args.k)
+
+solver = KmeanSolver(points, bestk)
 solver.solve()
 
 pl = ClusterPlot()

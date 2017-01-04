@@ -1,3 +1,6 @@
+from utils.distances import euclidianDistance
+import math
+
 class Cluster():
     def __init__(self, points, centroid):
         self._points = points
@@ -20,6 +23,13 @@ class Cluster():
 
         self._centroid = cent
         return cent
+
+    def getSse(self):
+        error = 0
+        zeros = [0] * len(self.getCentroid())
+        for point in self.getPoints():
+            error += (math.pow(euclidianDistance(point,self.getCentroid()),2) / math.pow(euclidianDistance(point,zeros),2))
+        return error
 
     def clear(self):
         self._N = 0
