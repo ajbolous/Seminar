@@ -9,6 +9,11 @@ args = getArgs()
 points = randomChars(args.size)
 pl = ClusterPlot()
 
+from algorithms.elbow_method import findBestK
+
+if not args.k:
+    args.k = findBestK(points,10)
+
 solver = KmeanSolver(points, args.k, manhattanDistance)
 solver.solve()
 pl.plot(points, solver, labels=[str(unichr(point[0])) for point in points], proj='3d' if args.d3 else None )

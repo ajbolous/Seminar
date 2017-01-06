@@ -10,6 +10,12 @@ words = ['word','work','store','goal','bore','star','guitar','get','set',
 	'more','sore','ward','good','golf','bad','ace','ban','ran','ham',
 	'hello','was','apple','ate','meet','war','jello','bat','hat','rat']
 points = generateWordVectors(words,5)
+
+from algorithms.elbow_method import findBestK
+
+if not args.k:
+    args.k = findBestK(points,10)
+
 solver = KmeanSolver(points, args.k, manhattanDistance)
 solver.solve()
 

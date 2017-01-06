@@ -4,7 +4,7 @@ import random
 def getArgs():
     import argparse
     parser = argparse.ArgumentParser(description='Cluster data using KMeans and dendogram')
-    parser.add_argument('--k', metavar='K', default=3, type=int, help='The number of clusters to produce')
+    parser.add_argument('--k', metavar='K', default=None, type=int, help='The number of clusters to produce')
     parser.add_argument('--dim', metavar='D', default=2, type=int, help='the dimension of the data')
     parser.add_argument('--size', metavar='N', default=100, type=int, help='the size of the data')
     parser.add_argument('--dendo',action='store_true', help='show dendograph')

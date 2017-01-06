@@ -6,6 +6,13 @@ def manhattanDistance(v,u):
         dist += math.fabs(a-b)
     return dist
 
+def hammingDistance(v,u):
+    dist = 0
+    for a,b in zip(v,u):
+        if a != b:
+            dist += 1
+    return dist
+
 def euclidianDistance(v,u):
     s = 0
     for a,b in zip(v,u):
